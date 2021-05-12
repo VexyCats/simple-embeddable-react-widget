@@ -10,18 +10,18 @@ const defaultconfig = {
 let widgetComponent = null;
 
 function app(window) {
-  // console.log(`${widgetName} starting`);
+  console.log(`${widgetName} starting`);
   // If we don't already have a name for widget's global object
   // assigned by the host, then they must be using the simple <script> tag method
   // so we need to get our data out of that tag
   if (!window[widgetName]) {
     let tag = document.getElementById(widgetName + "-Script");
     if (!tag) {
-      throw Error(`Cannot find script tag with id {$widgetName}-Script`);
+      throw Error(`Cannot find script tag with id ${widgetName}-Script`);
     }
     let rawData = tag.getAttribute("data-config");
     rawData = rawData.replace(/'/g, '"');
-    // console.log(rawData);
+    console.log(rawData);
     let data = JSON.parse(rawData);
     window[widgetName] = data.name;
     let placeholder = {};
@@ -36,10 +36,10 @@ function app(window) {
   window[widgetConfigName] = defaultconfig;
 
   if (placeholder) {
-    // console.log(`${widgetName} placeholder found`);
+    console.log(`${widgetName} placeholder found`);
     let queue = placeholder.q;
     if (queue) {
-      // console.log(`${widgetName} placeholder queue found`);
+      console.log(`${widgetName} placeholder queue found`);
       for (var i = 0; i < queue.length; i++) {
         apiHandler(queue[i][0], queue[i][1]);
       }
@@ -54,11 +54,11 @@ function apiHandler(api, params) {
   if (!api) throw Error("API method required");
   api = api.toLowerCase();
   let config = window[widgetConfigName];
-  // console.log(`Handling API call ${api}`, params, config);
+  console.log(`Handling API call ${api}`, params, config);
 
   switch (api) {
     case "init":
-      // console.log("init");
+      console.log("init");
       config = Object.assign({}, config, params);
       window[widgetConfigName] = config;
 
