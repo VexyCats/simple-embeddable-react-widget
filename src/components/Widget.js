@@ -10,30 +10,12 @@ import { checkIfVideoExtension } from "../utils/checkIfVideoExtension";
 import { getETHPrice } from "../utils/pricefeed";
 import CarouselCard from "./CarouselCard";
 import Description from "./Description";
+import Measure from "./Measure";
 import SocialSharing from "./SocialSharing";
 import styles from "./widget.module.css";
 
 const INITIAL_LOAD = 8;
 const STEP_SIZE = 8;
-
-const responsive = {
-  superLargeDesktop: {
-    breakpoint: { max: 4000, min: 3000 },
-    items: 3,
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 2,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
-};
 
 class Widget extends React.Component {
   constructor(props) {
@@ -59,11 +41,24 @@ class Widget extends React.Component {
       size: null, //normal, mini
       widgetData: null,
       widgetDataArr: [],
+
+      responsive: {
+        all: {
+          breakpoint: { max: 4000, min: 0 },
+          items: 1,
+        },
+      },
+      carouselSize: {
+        height: null,
+        width: null,
+      },
     };
 
     this.loadMore = this.loadMore.bind(this);
     this.addCount = this.addCount.bind(this);
+    this.onSizeChange = this.onSizeChange.bind(this);
   }
+
   async componentDidMount() {
     const price = await getETHPrice();
     this.setState({
@@ -334,6 +329,42 @@ class Widget extends React.Component {
     return SEO.replace(/[^a-zA-Z0-9-_]/g, "");
   }
 
+  onSizeChange(bounds) {
+    this.setState(
+      {
+        carouselSize: {
+          height: bounds.height,
+          width: bounds.width,
+        },
+      },
+      () => this.updateResponsive()
+    );
+  }
+
+  updateResponsive() {
+    const { width } = this.state.carouselSize;
+    let items = null;
+
+    if (3000 < width && width < 4000) {
+      items = 6;
+    } else if (1024 < width && width < 3000) {
+      items = 4;
+    } else if (464 < width && width < 1024) {
+      items = 2;
+    } else {
+      items = 1;
+    }
+
+    this.setState({
+      responsive: {
+        all: {
+          breakpoint: { max: 4000, min: 0 },
+          items,
+        },
+      },
+    });
+  }
+
   render() {
     const {
       error,
@@ -353,6 +384,8 @@ class Widget extends React.Component {
 
       lastKey,
       maxKey,
+
+      responsive,
     } = this.state;
 
     if (type === "nftId") {
@@ -1017,7 +1050,6 @@ class Widget extends React.Component {
                   />
                 )}
               </div>
-
               {size !== "mini" && (
                 <div className={styles.gridContainer}>
                   {widgetDataArr.map((item, i) => (
@@ -1156,39 +1188,39 @@ class Widget extends React.Component {
                   ))}
                 </div>
               )}
-
               {size === "mini" && (
-                <Carousel
-                  containerClass={styles.carousel}
-                  swipeable={true}
-                  responsive={responsive}
-                  // infinite={true}
-                  keyBoardControl={true}
-                  transitionDuration={1}
-                  arrows={true}
-                  afterChange={() => {
-                    this.addCount();
-                  }}
-                >
-                  {widgetDataArr.map((item, i) => {
-                    return (
-                      <CarouselCard
-                        item={item}
-                        displayed={this.state.displayed}
-                        index={i}
-                        key={i}
-                        ETHprice={this.state.ETHprice}
-                        customStyles={{
-                          backgroundColor,
-                          fontColor,
-                          subtitleColor,
-                          buttonColor,
-                          buttonTextColor,
-                        }}
-                      />
-                    );
-                  })}
-                </Carousel>
+                <Measure onChange={this.onSizeChange}>
+                  <Carousel
+                    containerClass={styles.carousel}
+                    swipeable={true}
+                    responsive={responsive}
+                    keyBoardControl={true}
+                    transitionDuration={1}
+                    arrows={true}
+                    afterChange={() => {
+                      this.addCount();
+                    }}
+                  >
+                    {widgetDataArr.map((item, i) => {
+                      return (
+                        <CarouselCard
+                          item={item}
+                          displayed={this.state.displayed}
+                          index={i}
+                          key={i}
+                          ETHprice={this.state.ETHprice}
+                          customStyles={{
+                            backgroundColor,
+                            fontColor,
+                            subtitleColor,
+                            buttonColor,
+                            buttonTextColor,
+                          }}
+                        />
+                      );
+                    })}
+                  </Carousel>
+                </Measure>
               )}
 
               <div style={{ position: "relative" }}>
