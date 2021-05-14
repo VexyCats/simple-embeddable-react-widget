@@ -24,9 +24,7 @@ export default class CarouselCard extends React.Component {
         style={
           {
             backgroundColor: backgroundColor,
-
-            marginLeft: "15px",
-            marginRight: "15px",
+            margin: "auto",
           } || null
         }
         className={styles.gridItemCard}
