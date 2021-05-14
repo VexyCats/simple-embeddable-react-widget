@@ -110,8 +110,8 @@
   color: #2d2d2d;
   width: fit-content;
 
-  border-bottom: 4px solid #550ded;
-  padding-bottom: 6px;
+  border-bottom: 4px solid #000000;
+  padding-bottom: 4px;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -121,12 +121,13 @@
   line-height: 140%;
   letter-spacing: 0.02rem;
   color: #2d2d2d;
+  margin-top: 8px;
 }
 
 .buyNow {
   text-decoration: none;
   text-align: center;
-  background-color: #550ded;
+  background-color: #000000;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -143,7 +144,7 @@
 .miniBuyNow {
   text-decoration: none;
   text-align: center;
-  background-color: #550ded;
+  background-color: #000000;
 
   font-size: 1rem;
   letter-spacing: 0.02rem;
@@ -161,7 +162,7 @@
 .mobileBuyNow {
   text-decoration: none;
   text-align: center;
-  background-color: #550ded;
+  background-color: #000000;
 
   font-size: 1.25rem;
   letter-spacing: 0.02rem;
@@ -267,7 +268,7 @@
 .buyNowSingle {
   text-decoration: none;
   text-align: center;
-  background-color: #550ded;
+  background-color: #000000;
   position: absolute;
   bottom: 0;
   left: 0;
