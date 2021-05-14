@@ -566,24 +566,8 @@ class Widget extends React.Component {
                         this.formatMoney(
                           this.state.ETHprice * widgetData.buyPrice
                         )
-                      )}{" "}
-                    </strong>
-                    <div>
-                      (
-                      {!widgetData.currencyUnit === "ETH" ? (
-                        <>
-                          <span style={{ fontFamily: "sans-serif" }}>
-                            {`\u039E`}
-                          </span>
-                          {widgetData.buyPrice}
-                        </>
-                      ) : (
-                        this.formatMoney(
-                          this.state.ETHprice * widgetData.buyPrice
-                        )
                       )}
-                      )
-                    </div>
+                    </strong>
                   </h2>
 
                   <Description
@@ -780,24 +764,8 @@ class Widget extends React.Component {
                         this.formatMoney(
                           this.state.ETHprice * widgetData.buyPrice
                         )
-                      )}{" "}
-                    </strong>
-                    <div>
-                      (
-                      {!widgetData.currencyUnit === "ETH" ? (
-                        <>
-                          <span style={{ fontFamily: "sans-serif" }}>
-                            {`\u039E`}
-                          </span>
-                          {widgetData.buyPrice}
-                        </>
-                      ) : (
-                        this.formatMoney(
-                          this.state.ETHprice * widgetData.buyPrice
-                        )
                       )}
-                      )
-                    </div>
+                    </strong>
                   </h2>
 
                   <a
@@ -960,24 +928,8 @@ class Widget extends React.Component {
                         this.formatMoney(
                           this.state.ETHprice * widgetData.buyPrice
                         )
-                      )}{" "}
-                    </strong>
-                    <div>
-                      (
-                      {!widgetData.currencyUnit === "ETH" ? (
-                        <>
-                          <span style={{ fontFamily: "sans-serif" }}>
-                            {`\u039E`}
-                          </span>
-                          {widgetData.buyPrice}
-                        </>
-                      ) : (
-                        this.formatMoney(
-                          this.state.ETHprice * widgetData.buyPrice
-                        )
                       )}
-                      )
-                    </div>
+                    </strong>
                   </h2>
 
                   <a
@@ -1134,24 +1086,8 @@ class Widget extends React.Component {
                               this.formatMoney(
                                 this.state.ETHprice * item.buyPrice
                               )
-                            )}{" "}
-                          </strong>
-                          <div>
-                            (
-                            {!item.currencyUnit === "ETH" ? (
-                              <>
-                                <span style={{ fontFamily: "sans-serif" }}>
-                                  {`\u039E`}
-                                </span>
-                                {item.buyPrice}
-                              </>
-                            ) : (
-                              this.formatMoney(
-                                this.state.ETHprice * item.buyPrice
-                              )
                             )}
-                            )
-                          </div>
+                          </strong>
                         </h2>
                         <div
                           style={
