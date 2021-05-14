@@ -19,10 +19,10 @@
         js.src = f;
         js.async = 1;
         fjs.parentNode.insertBefore(js, fjs);
-      })(window, document, "script", "w1", "./widget.js");
-      w1("init", { targetElementId: "root" });
+      })(window, document, "script", "widget", "./widget.js");
+      widget("init", { targetElementId: "root" });
       // one item id
-      // w1("shownft", {
+      // widget("shownft", {
       //   ids: ["collectibles/listing/1FCt9MCBTAfIpfA"],
       //   backgroundColor: "white",
       //   fontColor: "#2d2d2d",
@@ -36,7 +36,7 @@
       // });
 
       // many item id
-      // w1("shownft", {
+      // widget("shownft", {
       //   ids: [
       //     "videos/listing/AkbbGXn5EtMr-Yv",
       //     "art/listing/w1ZkGpAfJebod0P",
@@ -54,7 +54,7 @@
       // });
 
       // user name - unused
-      // w1("shownft", {
+      // widget("shownft", {
       //   username: "spader",
       //   backgroundColor: "white",
       //   fontColor: "#2d2d2d",
@@ -68,7 +68,7 @@
       // });
 
       // store id
-      w1("shownft", {
+      widget("shownft", {
         storeId: "dd6f8260-2215-45fd-960e-e205b8680126",
         backgroundColor: "white",
         fontColor: "#2d2d2d",
@@ -81,9 +81,5 @@
         size: "mini",
       });
     </script>
-
-    <!-- <div>
-      <button onclick="w1('message', 'Hello world!');">Send Message</button>
-    </div> -->
   </body>
 </html>
