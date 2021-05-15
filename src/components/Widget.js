@@ -196,6 +196,7 @@ class Widget extends React.Component {
       })
     );
     items = items.filter((item) => item !== undefined);
+    items = this.processActive(items);
     const widgetDataArr = [];
     for (let i = 0; i < items.length; i++) {
       const SEO = this.getSEOstring(items[i].title, items[i].sub_title);
@@ -275,6 +276,10 @@ class Widget extends React.Component {
     });
   }
 
+  processActive(items) {
+    items = items.filter((i) => i.state === "ACTIVE");
+    return items;
+  }
   async showWithUsernameOrStoreId(params, fetchType) {
     let items;
 
@@ -285,6 +290,7 @@ class Widget extends React.Component {
         // lastKey: undefined,
       };
       items = await fetchByUsername(fetchParams);
+      items = this.processActive(items);
     }
 
     if (
@@ -297,6 +303,7 @@ class Widget extends React.Component {
         // lastKey: undefined,
       };
       items = await fetchByStoreId(fetchParams);
+      items = this.processActive(items);
     }
     this.setState({
       backgroundColor: params.backgroundColor,
