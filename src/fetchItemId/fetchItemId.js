@@ -11,7 +11,9 @@ export const fetchById = async (id) => {
         return res.json();
       })
       .then((data) => (fetchResult = data));
-    return fetchResult._source.data;
+    if (fetchResult._source.data.state === "ACTIVE") {
+      return fetchResult._source.data;
+    }
   } catch (err) {
     console.warn(err);
   }

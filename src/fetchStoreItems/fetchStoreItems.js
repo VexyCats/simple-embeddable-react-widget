@@ -8,7 +8,8 @@ export const fetchByStoreId = async (data) => {
       `${fetchItem}bystoreid?network=${network}`,
       data
     );
-    return res.Items;
+    const items = res.Items.filter((item) => item.state === "ACTIVE");
+    return items;
   } catch (err) {
     console.log(err);
   }
