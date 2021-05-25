@@ -21,7 +21,6 @@ class Widget extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: null,
       displayed: 8,
 
       ETHprice: null,
@@ -145,9 +144,6 @@ class Widget extends React.Component {
   async showWithId(params) {
     const item = await fetchById(params.ids[0]);
     if (!item) {
-      this.setState({
-        error: "This listing is not available",
-      });
       return;
     }
 
@@ -173,6 +169,7 @@ class Widget extends React.Component {
       userProfileUrl,
       profileImg,
       socialMedia,
+      itemState: item.state,
     };
 
     this.setState({
@@ -367,8 +364,6 @@ class Widget extends React.Component {
 
   render() {
     const {
-      error,
-
       backgroundColor,
       fontColor,
       subtitleColor,
@@ -398,15 +393,6 @@ class Widget extends React.Component {
           }
           className={styles.fontContainer}
         >
-          <div
-            style={{
-              textAlign: "center",
-              fontSize: "24px",
-              marginTop: "24px",
-            }}
-          >
-            {error}
-          </div>
           {widgetData && size !== "mini" && (
             <div className={styles.normalContainer}>
               <div className={styles.topContainer}>
@@ -576,27 +562,43 @@ class Widget extends React.Component {
                     descriptionData={widgetData.description}
                   />
 
-                  <a
-                    style={
-                      {
-                        backgroundColor: buttonColor,
-                      } || null
-                    }
-                    className={styles.buyNow}
-                    href={widgetData.itemUrl}
-                  >
+                  {widgetData.itemState === "ACTIVE" && (
+                    <a
+                      style={
+                        {
+                          backgroundColor: buttonColor,
+                        } || null
+                      }
+                      className={styles.buyNow}
+                      href={widgetData.itemUrl}
+                    >
+                      <div
+                        style={
+                          {
+                            color: buttonTextColor,
+                          } || null
+                        }
+                      >
+                        Buy Now
+                      </div>
+                    </a>
+                  )}
+
+                  {widgetData.itemState === "SOLD" && (
                     <div
                       style={
                         {
-                          color: buttonTextColor,
+                          color: buttonColor,
+                          border: `1px solid ${buttonColor}`,
                         } || null
                       }
+                      className={styles.itemSold}
                     >
-                      Buy Now
+                      <span>ITEM SOLD</span>
                     </div>
-                  </a>
+                  )}
                 </div>
-              </div>{" "}
+              </div>
             </div>
           )}
 
@@ -768,18 +770,34 @@ class Widget extends React.Component {
                     </strong>
                   </h2>
 
-                  <a
-                    style={
-                      {
-                        backgroundColor: buttonColor,
-                        color: buttonTextColor,
-                      } || null
-                    }
-                    className={styles.miniBuyNow}
-                    href={widgetData.itemUrl}
-                  >
-                    Buy Now
-                  </a>
+                  {widgetData.itemState === "ACTIVE" && (
+                    <a
+                      style={
+                        {
+                          backgroundColor: buttonColor,
+                          color: buttonTextColor,
+                        } || null
+                      }
+                      className={styles.miniBuyNow}
+                      href={widgetData.itemUrl}
+                    >
+                      Buy Now
+                    </a>
+                  )}
+
+                  {widgetData.itemState === "SOLD" && (
+                    <div
+                      style={
+                        {
+                          color: buttonColor,
+                          border: `1px solid ${buttonColor}`,
+                        } || null
+                      }
+                      className={styles.miniItemSold}
+                    >
+                      <span>ITEM SOLD</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -932,18 +950,34 @@ class Widget extends React.Component {
                     </strong>
                   </h2>
 
-                  <a
-                    style={
-                      {
-                        backgroundColor: buttonColor,
-                        color: buttonTextColor,
-                      } || null
-                    }
-                    className={styles.mobileBuyNow}
-                    href={widgetData.itemUrl}
-                  >
-                    Buy Now
-                  </a>
+                  {widgetData.itemState === "ACTIVE" && (
+                    <a
+                      style={
+                        {
+                          backgroundColor: buttonColor,
+                          color: buttonTextColor,
+                        } || null
+                      }
+                      className={styles.mobileBuyNow}
+                      href={widgetData.itemUrl}
+                    >
+                      Buy Now
+                    </a>
+                  )}
+
+                  {widgetData.itemState === "SOLD" && (
+                    <div
+                      style={
+                        {
+                          color: buttonColor,
+                          border: `1px solid ${buttonColor}`,
+                        } || null
+                      }
+                      className={styles.mobileItemSold}
+                    >
+                      <span>ITEM SOLD</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
