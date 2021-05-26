@@ -135,25 +135,41 @@ export default class CarouselCard extends React.Component {
             {item.username}
           </div>
 
-          <a
-            style={
-              {
-                backgroundColor: buttonColor,
-              } || null
-            }
-            className={styles.buyNowSingle}
-            href={item.itemUrl}
-          >
+          {item.itemState === "ACTIVE" && (
+            <a
+              style={
+                {
+                  backgroundColor: buttonColor,
+                } || null
+              }
+              className={styles.buyNowSingle}
+              href={item.itemUrl}
+            >
+              <div
+                style={
+                  {
+                    color: buttonTextColor,
+                  } || null
+                }
+              >
+                Buy Now
+              </div>
+            </a>
+          )}
+
+          {item.itemState === "SOLD" && (
             <div
               style={
                 {
-                  color: buttonTextColor,
+                  color: buttonColor,
+                  border: `1px solid ${buttonColor}`,
                 } || null
               }
+              className={styles.itemSoldSingle}
             >
-              Buy Now
+              <span>ITEM SOLD</span>
             </div>
-          </a>
+          )}
         </div>
       </div>
     );
